@@ -4,8 +4,6 @@ import { useWeb3Store } from '~/stores/web3'
 const store = useWeb3Store()
 const networkName = import.meta.env.VITE_APP_NETWORK_NAME
 
-onMounted(() => store.connect(false))
-
 </script>
 
 <template>

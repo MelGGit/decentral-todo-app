@@ -1,4 +1,10 @@
 <script setup lang="ts">
+
+  const props = defineProps<{
+    list: string
+  }>()
+
+
 </script>
 
 <template>
@@ -11,7 +17,7 @@
     bg="[#303030]"
   >
     <h2 text="xl">
-      Name
+      {{props.list}}
     </h2>
   </section>
 </template>

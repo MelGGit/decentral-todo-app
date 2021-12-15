@@ -1,4 +1,6 @@
+import { ethers } from 'ethers'
 import { defineStore, acceptHMRUpdate } from 'pinia'
+import TodoList from '~/utils/TodoList.json'
 
 export const useWeb3Store = defineStore('web3Store', {
   state: () => ({
@@ -6,8 +8,9 @@ export const useWeb3Store = defineStore('web3Store', {
     error: null as string | null,
     isCorrectNetwork: true,
     isLoading: false,
-    lists: null as {id: number; name: string}[] | null,
+    lists: null as string[] | null,
     todos: null as {id: number; text: string; done: boolean}[] | null,
+    contractAddress: '0xcf7ed3acca5a467e9e704c703e8d87f634fb0fc9'
   }),
 
   actions: {
@@ -20,7 +23,7 @@ export const useWeb3Store = defineStore('web3Store', {
         }
         if (!(await this.checkIfisAlreadyConnected()) && connect) await this.requestAccess()
         await this.checkIsCorrectNetwork()
-        // await this.fetchTodos()
+        await this.getLists()
         await this.setupEventListeners()
       }
       catch (error) {
@@ -76,6 +79,41 @@ export const useWeb3Store = defineStore('web3Store', {
         await this.checkIsCorrectNetwork()
       })
     },
+    async getContract() {
+      try {
+      const { ethereum } = window
+      const provider = new ethers.providers.Web3Provider(ethereum)
+      const signer = provider.getSigner()
+      const connectedContract = new ethers.Contract(
+        this.contractAddress,
+        TodoList.abi,
+        signer
+      )
+      return connectedContract
+      } catch (error) {
+        console.log(error)
+        console.log('connected contract not found')
+        return null
+      }
+    },
+    async addList(listName: string) {
+      try {
+        const connectedContract = await this.getContract()
+        const addListTxn = await connectedContract?.addList(listName)
+        await addListTxn.wait()
+      } catch (error) {
+        console.log(error)
+      } 
+    },
+    async getLists() {
+      try {
+        const connectedContract = await this.getContract()
+        const getListsTx = await connectedContract?.getLists()
+        this.lists = getListsTx
+      } catch(error) {
+        console.log(error)
+      }
+    }
   },
 })
 

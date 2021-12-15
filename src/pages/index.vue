@@ -1,6 +1,9 @@
 <script setup lang="ts">
 // import { useUserStore } from '~/stores/user'
 
+import { useWeb3Store } from '~/stores/web3';
+
+const store = useWeb3Store()
 // const user = useUserStore()
 // const name = ref(user.savedName)
 
@@ -9,7 +12,7 @@
 //   if (name.value)
 //     router.push(`/hi/${encodeURIComponent(name.value)}`)
 // }
-
+onMounted(() => store.connect(false))
 // const { t } = useI18n()
 </script>
 
@@ -18,8 +21,8 @@
     <h1 text="6xl" m="b-5">
       Todo Lists
     </h1>
-    <div w="full" p="x-20" flex="~" gap="5">
-      <TodoList />
+    <div w="full" p="x-20" flex="~ wrap" gap="5">
+      <TodoList v-for="(list, i) in store.lists" :key="i" :list="list" />
       <AddTodoList />
     </div>
     <!-- <p class="text-4xl">
