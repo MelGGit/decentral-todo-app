@@ -38,7 +38,7 @@ const addNewList = async() => {
     justify="items-center"
     border="white 1"
   >
-    <button v-if="!isAddListClicked" text="4xl" flex="inline" @click="toggleIsAddListClicked">
+    <button v-if="!isAddListClicked" text="4xl" flex="inline" @click="toggleIsAddListClicked"  hover="opacity-50">
       <carbon-add-alt class="inline-block" />
     </button>
     <input v-if="isAddListClicked"

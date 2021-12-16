@@ -8,9 +8,9 @@ export const useWeb3Store = defineStore('web3Store', {
     error: null as string | null,
     isCorrectNetwork: true,
     isLoading: false,
-    lists: null as string[] | null,
-    todos: null as {id: number; text: string; done: boolean}[] | null,
-    contractAddress: '0xcf7ed3acca5a467e9e704c703e8d87f634fb0fc9'
+    lists: [] as string[],
+    tasks: [] as {text: string; done: boolean}[],
+    contractAddress: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'
   }),
 
   actions: {
@@ -73,6 +73,7 @@ export const useWeb3Store = defineStore('web3Store', {
     async setupEventListeners() {
       const { ethereum } = window
       ethereum.on('accountsChanged', async() => {
+        history.replaceState(null, '', '/')
         window.location.reload()
       })
       ethereum.on('chainChanged', async() => {
@@ -111,6 +112,15 @@ export const useWeb3Store = defineStore('web3Store', {
         const getListsTx = await connectedContract?.getLists()
         this.lists = getListsTx
       } catch(error) {
+        console.log(error)
+      }
+    },
+    async getTasks(listName: string) {
+      try {
+        const connectedContract = await this.getContract()
+        const getTasksTxn = await connectedContract?.getTasks(listName)
+        this.tasks = getTasksTxn || []
+      } catch (error) {
         console.log(error)
       }
     }

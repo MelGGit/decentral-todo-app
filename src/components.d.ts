@@ -17,8 +17,12 @@ declare module 'vue' {
     CarbonWarning: typeof import('~icons/carbon/warning')['default']
     Footer: typeof import('./components/Footer.vue')['default']
     Header: typeof import('./components/Header.vue')['default']
+    NewTaskItem: typeof import('./components/NewTaskItem.vue')['default']
     README: typeof import('./components/README.md')['default']
+    TaskItem: typeof import('./components/TaskItem.vue')['default']
     TodoList: typeof import('./components/TodoList.vue')['default']
+    TodoListDetail: typeof import('./components/TodoListDetail.vue')['default']
+    TodoListDetails: typeof import('./components/TodoListDetails.vue')['default']
     Web3: typeof import('./components/Web3.vue')['default']
   }
 }

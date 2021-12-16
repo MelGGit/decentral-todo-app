@@ -7,12 +7,16 @@ const store = useWeb3Store()
 // const user = useUserStore()
 // const name = ref(user.savedName)
 
-// const router = useRouter()
+const router = useRouter()
 // const go = () => {
 //   if (name.value)
 //     router.push(`/hi/${encodeURIComponent(name.value)}`)
 // }
 onMounted(() => store.connect(false))
+
+const handleClickTodoList = (list: string) => {
+  router.push(`/todolist/${encodeURIComponent(list)}`)
+}
 // const { t } = useI18n()
 </script>
 
@@ -22,7 +26,7 @@ onMounted(() => store.connect(false))
       Todo Lists
     </h1>
     <div w="full" p="x-20" flex="~ wrap" gap="5">
-      <TodoList v-for="(list, i) in store.lists" :key="i" :list="list" />
+      <TodoList v-for="(list, i) in store.lists" :key="i" :list="list" @click="handleClickTodoList(list)" cursor="pointer" hover="opacity-50" />
       <AddTodoList />
     </div>
     <!-- <p class="text-4xl">
