@@ -5,8 +5,8 @@
   const isDone = ref(props.done)
 
   const handleToggleDone = () => {
-    emit('toggleDone', !isDone)
     isDone.value = !isDone.value
+    emit('toggleDone', isDone.value)
   }
 
 </script>

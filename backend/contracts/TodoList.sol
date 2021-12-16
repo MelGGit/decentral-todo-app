@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.4;
+
 
 contract TodoList {
   address private owner;
@@ -9,8 +11,18 @@ contract TodoList {
     bool done;
   }
 
+ // addressTo... {
+   // 0xndm,k : ['Test']
+//  }
   mapping(address => string[]) public addressToListsMapping;
 
+//  addressToListsToTasksMapping ¨{
+//   0xbajd {
+//     test: {
+//       ['ajdgjasd', 'dnfksdfn']
+//     }
+//   }
+// }
   mapping(address => mapping(string => Task[])) public addressToListsToTasksMapping;
 
   function addList(string memory _listName) public {
@@ -39,5 +51,12 @@ contract TodoList {
 
   function getTasks(string memory _listName) public view returns(Task[] memory) {
     return addressToListsToTasksMapping[msg.sender][_listName];
+  }
+
+  function deleteList(string memory _listName, uint index) public {
+    string[] storage currentLists = addressToListsMapping[msg.sender];
+    currentLists[index] = currentLists[currentLists.length -1];
+    currentLists.pop();
+    delete addressToListsToTasksMapping[msg.sender][_listName];
   }
 }

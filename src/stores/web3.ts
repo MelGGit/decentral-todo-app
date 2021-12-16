@@ -10,7 +10,7 @@ export const useWeb3Store = defineStore('web3Store', {
     isLoading: false,
     lists: [] as string[],
     tasks: [] as {text: string; done: boolean}[],
-    contractAddress: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'
+    contractAddress: '0x0165878A594ca255338adfa4d48449f69242Eb8F'
   }),
 
   actions: {
@@ -120,6 +120,24 @@ export const useWeb3Store = defineStore('web3Store', {
         const connectedContract = await this.getContract()
         const getTasksTxn = await connectedContract?.getTasks(listName)
         this.tasks = getTasksTxn || []
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async addUpdateTasks(listName: string, tasks: {text: string, done: boolean}[]) {
+      try {
+        const connectedContract = await this.getContract()
+        const addUpdateTasksTxn = await connectedContract?.addUpdateTasks(listName, tasks)
+        await addUpdateTasksTxn.wait()
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async deleteList(listName: string, listIndex: number) {
+      try {
+        const connectedContract = await this.getContract()
+        const deleteListTxn = await connectedContract?.deleteList(listName, listIndex)
+        await deleteListTxn.wait()
       } catch (error) {
         console.log(error)
       }

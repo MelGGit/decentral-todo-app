@@ -5,10 +5,13 @@
 declare module 'vue' {
   export interface GlobalComponents {
     AddTodoList: typeof import('./components/AddTodoList.vue')['default']
+    'Carbon:delete': typeof import('~icons/carbon/delete')['default']
     'CarbonAdd:filled': typeof import('~icons/carbon/add-filled')['default']
     CarbonAddAlt: typeof import('~icons/carbon/add-alt')['default']
     CarbonCampsite: typeof import('~icons/carbon/campsite')['default']
+    CarbonDelete24Filled: typeof import('~icons/carbon/delete24-filled')['default']
     CarbonDicomOverlay: typeof import('~icons/carbon/dicom-overlay')['default']
+    'CarbonFluent:delete24Filled': typeof import('~icons/carbon/fluent-delete24-filled')['default']
     CarbonLanguage: typeof import('~icons/carbon/language')['default']
     CarbonLogoGithub: typeof import('~icons/carbon/logo-github')['default']
     CarbonMoon: typeof import('~icons/carbon/moon')['default']

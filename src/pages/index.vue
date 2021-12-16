@@ -14,8 +14,8 @@ const router = useRouter()
 // }
 onMounted(() => store.connect(false))
 
-const handleClickTodoList = (list: string) => {
-  router.push(`/todolist/${encodeURIComponent(list)}`)
+const handleClickTodoList = (list: string, i: number) => {
+  router.push(`/todolist/${encodeURIComponent(list)}/${encodeURIComponent(i)}`)
 }
 // const { t } = useI18n()
 </script>
@@ -26,7 +26,7 @@ const handleClickTodoList = (list: string) => {
       Todo Lists
     </h1>
     <div w="full" p="x-20" flex="~ wrap" gap="5">
-      <TodoList v-for="(list, i) in store.lists" :key="i" :list="list" @click="handleClickTodoList(list)" cursor="pointer" hover="opacity-50" />
+      <TodoList v-for="(list, i) in store.lists" :key="i" :list="list" @click="handleClickTodoList(list, i)" cursor="pointer" hover="opacity-50" />
       <AddTodoList />
     </div>
     <!-- <p class="text-4xl">
