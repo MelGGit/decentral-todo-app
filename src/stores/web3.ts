@@ -2,6 +2,13 @@ import { ethers } from 'ethers'
 import { defineStore, acceptHMRUpdate } from 'pinia'
 import TodoList from '~/utils/TodoList.json'
 
+// type Web3Store = {
+//   account: string | null
+//   error: string | null
+//   account: string | null
+//   account: string | null
+// }
+
 export const useWeb3Store = defineStore('web3Store', {
   state: () => ({
     account: null as string | null,
@@ -10,7 +17,7 @@ export const useWeb3Store = defineStore('web3Store', {
     isLoading: false,
     lists: [] as string[],
     tasks: [] as {text: string; done: boolean}[],
-    contractAddress: '0x0165878A594ca255338adfa4d48449f69242Eb8F'
+    contractAddress: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'
   }),
 
   actions: {

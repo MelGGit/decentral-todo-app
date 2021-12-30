@@ -12,12 +12,12 @@ contract TodoList {
   }
 
  // addressTo... {
-   // 0xndm,k : ['Test']
+   // 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 : ['Test']
 //  }
   mapping(address => string[]) public addressToListsMapping;
 
 //  addressToListsToTasksMapping ¨{
-//   0xbajd {
+//   0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 {
 //     test: {
 //       ['ajdgjasd', 'dnfksdfn']
 //     }

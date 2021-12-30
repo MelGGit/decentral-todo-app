@@ -2,7 +2,7 @@
 import { Ref } from 'vue';
 import { useWeb3Store } from '~/stores/web3';
 
-const props = defineProps<{ listName: string, i: string | number }>()
+const props = defineProps<{ listName: string, i: string }>()
 const store = useWeb3Store()
 const router = useRouter()
 const tasksArray: Ref<{text: string, done: boolean}[]> = ref([])

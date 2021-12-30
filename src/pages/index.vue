@@ -25,7 +25,7 @@ const handleClickTodoList = (list: string, i: number) => {
     <h1 text="6xl" m="b-5">
       Todo Lists
     </h1>
-    <div w="full" p="x-20" flex="~ wrap" gap="5">
+    <div w="full" p="x-20" flex="~ wrap" gap="5" animate="animated pulse duration-2500">
       <TodoList v-for="(list, i) in store.lists" :key="i" :list="list" @click="handleClickTodoList(list, i)" cursor="pointer" hover="opacity-50" />
       <AddTodoList />
     </div>

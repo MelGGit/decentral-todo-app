@@ -3,12 +3,13 @@ import { useWeb3Store } from '~/stores/web3';
 
   const router = useRouter()
   const store = useWeb3Store()
-  const props = defineProps<{ listIndex: string | number ,listName: string, tasks: {text: string, done: boolean}[] }>()
+  const props = defineProps<{ listIndex: string ,listName: string, tasks: {text: string, done: boolean}[] }>()
   const emit = defineEmits<{(event: 'toggleDone', done: boolean, i: number):void,
                             (event: 'addNewTask', text: string):void}>()
 
- const handleDeleteList = async (listName: string, listIndex: string | number) => {
-  await store.deleteList(listName, listIndex as number)
+ const handleDeleteList = async (listName: string, listIndex: string) => {
+  const listIndexNumber = Number(listIndex)
+  await store.deleteList(listName, listIndexNumber)
   router.push('/')
  }
 

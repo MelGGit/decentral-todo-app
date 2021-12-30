@@ -6,6 +6,8 @@ import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
+import "@nomiclabs/hardhat-ganache";
+
 
 dotenv.config();
 
@@ -30,6 +32,9 @@ const config: HardhatUserConfig = {
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
+    ganache: {
+      url: "HTTP://127.0.0.1:7545",
+    }
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,

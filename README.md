@@ -1,46 +1,88 @@
-# Advanced Sample Hardhat Project
+# Simple decentral Todo App
 
-This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.
+## Steps to install
 
-The project comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts. It also comes with a variety of other tools, preconfigured to work with the project code.
+### Clone to local
 
-Try running some of the following tasks:
-
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-npx hardhat help
-REPORT_GAS=true npx hardhat test
-npx hardhat coverage
-npx hardhat run scripts/deploy.ts
-TS_NODE_FILES=true npx ts-node scripts/deploy.ts
-npx eslint '**/*.{js,ts}'
-npx eslint '**/*.{js,ts}' --fix
-npx prettier '**/*.{json,sol,md}' --check
-npx prettier '**/*.{json,sol,md}' --write
-npx solhint 'contracts/**/*.sol'
-npx solhint 'contracts/**/*.sol' --fix
+```bash
+$ git clone https://github.com/MelGGit/decentralized-todo-list.git
+$ cd decentralized-todo-list
+$ pnpm i # If you don't have pnpm installed, run: npm install -g pnpm
 ```
 
-# Etherscan verification
+### Go to backend folder and install dependencies
 
-To try out Etherscan verification, you first need to deploy a contract to an Ethereum network that's supported by Etherscan, such as Ropsten.
+- the backend folder contains the smart contract
+- you can start your local dev blockchain from here
 
-In this project, copy the .env.example file to a file named .env, and then edit it to fill in the details. Enter your Etherscan API key, your Ropsten node URL (eg from Alchemy), and the private key of the account which will send the deployment transaction. With a valid .env file in place, first deploy your contract:
-
-```shell
-hardhat run --network ropsten scripts/sample-script.ts
+```bash
+$ cd backend
+$ pnpm i
 ```
 
-Then, copy the deployment address and paste it in to replace `DEPLOYED_CONTRACT_ADDRESS` in this command:
+### Start local blockchain
 
-```shell
-npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
+```bash
+$ npx hardhat node
+```
+- a local development blockchain will run on http://127.0.0.1:8545/
+- also you will get a list of all available accounts and their private keys
+- !important! your local network needs to run the whole time. Else the App wont function
+
+### Add an account to Metamask
+
+To interact with your local Blockchain you need an account from the list in your terminal.
+
+#### Steps
+- go to Metamask in the browser
+- click the round circle in the top right
+- click on import account
+- copy one of the private keys in from the terminal and paste it into Metamask
+- hit import
+
+### Add Hardhat to your networks
+
+The second step to interact with your local development blockchain is to add it to your list of networks.
+
+#### Steps
+- click the circle in the top right again
+- click on settings
+- click on Networks
+- click on Add Network
+- Add Network name: Hardhat local
+- New RPC URL: http://127.0.0.1:8545/
+- ChainId: 31337
+
+Now Metamask can connect to your local Network.
+
+### Deploy the smart contract to your local network
+Open another terminal window and switch to the backend folder again.
+Run the deploy sript with:
+```bash
+$  npx hardhat run --network localhost scripts/deploy.ts
+```
+Now the smart contract has been deployed.
+
+### Copy the address of the smart contract
+After deploying the terminal will say:
+```bash
+TodoList deployed to: 0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512
+```
+The hex number in the end will be different to the one above.
+This is the address of the contract
+Copy that address starting with 0x
+Now go to the file web3.ts in the src folder.
+Paste the address into contractAddress: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'
+
+
+### Run the app
+
+Open another terminal window and type:
+
+```bash
+$ pnpm dev
 ```
 
-# Performance optimizations
+Now your browser will open and you can use the App.
 
-For faster runs of your tests and scripts, consider skipping ts-node's type checking by setting the environment variable `TS_NODE_TRANSPILE_ONLY` to `1` in hardhat's environment. For more details see [the documentation](https://hardhat.org/guides/typescript.html#performance-optimizations).
+Haven fun!
